@@ -2,38 +2,78 @@ package com.example.myapplication;
 
 import android.os.Bundle;
 
+import com.example.myapplication.Adapter.ViewPagerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager2.widget.ViewPager2;
 
-import android.view.Menu;
-import android.view.MenuItem;
+import android.util.Log;
 import android.view.View;
 
-import com.example.myapplication.ui.main.SectionsPagerAdapter;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
+    ViewPagerAdapter pagerAdapter;
+    @BindView(R.id.fab)
+    FloatingActionButton floatingActionButton;
+    @BindView(R.id.tablayout)
+    TabLayout tabLayout;
+    @BindView(R.id.view_pager)
+    ViewPager2 viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
-        ViewPager viewPager = findViewById(R.id.view_pager);
-        viewPager.setAdapter(sectionsPagerAdapter);
-        TabLayout tabs = findViewById(R.id.tabs);
-        tabs.setupWithViewPager(viewPager);
-        FloatingActionButton fab = findViewById(R.id.fab);
+        ButterKnife.bind(this);
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        tabLayout.addTab(tabLayout.newTab().setText("Products"));
+        tabLayout.addTab(tabLayout.newTab().setText("Providers"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        pagerAdapter = new ViewPagerAdapter(this,getSupportFragmentManager(),getLifecycle(), tabLayout.getTabCount());
+        viewPager.setAdapter(pagerAdapter);
+
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onPageSelected(int position) {
+                tabLayout.selectTab(tabLayout.getTabAt(position));
+                super.onPageSelected(position);
             }
         });
+
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
     }
+    @OnClick(R.id.fab)
+    public void Click(){
+        int pos = tabLayout.getSelectedTabPosition();
+        if (pos == 0){
+            //produtc
+        }
+        else{
+
+        }
+    }
+
 }

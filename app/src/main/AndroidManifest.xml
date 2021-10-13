@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Lab_A1_A2_android_Renu_C0814038">
         <activity
+            android:name=".ui.main.ProviderAddUpdate"
+            android:exported="true" />
+        <activity
+            android:name=".ui.main.ProductAddUpdate"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.Lab_A1_A2_android_Renu_C0814038.NoActionBar">
