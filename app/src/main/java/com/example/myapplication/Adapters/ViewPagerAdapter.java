@@ -1,11 +1,10 @@
-package com.example.myapplication.Adapter;
+package com.example.myapplication.Adapters;
 
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
@@ -13,11 +12,13 @@ import com.example.myapplication.Fragments.ProviderlistFragment;
 import com.example.myapplication.Fragments.productlistfragment;
 
 
-public class ViewPagerAdapter extends FragmentStateAdapter {
+public class ViewPagerAdapter extends FragmentStateAdapter
+{
     private Context context;
     int tabcount;
 
-    public ViewPagerAdapter(Context context,@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle,int tabcount) {
+    public ViewPagerAdapter(Context context,@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle,int tabcount)
+    {
         super(fragmentManager, lifecycle);
         this.context=context;
         this.tabcount=tabcount;
@@ -25,7 +26,8 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
 
     @NonNull
     @Override
-    public Fragment createFragment(int position) {
+    public Fragment createFragment(int position)
+    {
         if(position==0)
             return new productlistfragment();
         if(position==1)
@@ -34,7 +36,8 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount()
+    {
         return tabcount;
     }
 }

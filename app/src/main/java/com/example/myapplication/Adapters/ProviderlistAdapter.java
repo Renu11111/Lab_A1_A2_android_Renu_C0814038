@@ -1,4 +1,4 @@
-package com.example.myapplication.Adapter;
+package com.example.myapplication.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -25,7 +25,8 @@ public abstract class ProviderlistAdapter extends RecyclerView.Adapter<Providerl
      Context context;
     public List<Providerbean> list;
 
-    public ProviderlistAdapter(Context context, List<Providerbean> listprovider) {
+    public ProviderlistAdapter(Context context, List<Providerbean> listprovider)
+    {
         this.context=context;
         this.list=listprovider;
 
@@ -41,25 +42,31 @@ public abstract class ProviderlistAdapter extends RecyclerView.Adapter<Providerl
 
     @SuppressLint("RecyclerView")
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder,  int position) {
+    public void onBindViewHolder(ViewHolder viewHolder,  int position)
+    {
+
         viewHolder.name.setText(list.get(position).getProvider_name());
         viewHolder.email.setText(list.get(position).getProvider_email());
         viewHolder.products.setText("Products Count :" + Database.getInstance(context).getProductDao().getProductsCount(list.get(position).getProvider_id()));
-        viewHolder.delete.setOnClickListener(new View.OnClickListener() {
+        viewHolder.delete.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 deleteProvider(position);
             }
         });
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount()
+    {
         return list.size();
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+    {
         TextView name,email,price,products;
         ImageView delete;
         public ViewHolder(View view) {

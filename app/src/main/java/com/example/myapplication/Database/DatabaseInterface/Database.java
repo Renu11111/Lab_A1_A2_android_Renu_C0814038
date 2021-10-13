@@ -11,26 +11,32 @@ import com.example.myapplication.Pojo.Providerbean;
 import java.security.Provider;
 
 
-@androidx.room.Database(entities = { Providerbean.class, Productbean.class }, version = 1)
-public abstract class Database extends RoomDatabase {
+@androidx.room.Database(entities =
+        { Providerbean.class, Productbean.class }, version = 1)
+public abstract class Database extends RoomDatabase
+{
     public abstract ProductDao getProductDao();
     public abstract ProviderDao getProviderDao();
     private static Database database;
-    public static Database getInstance(Context context) {
-        if (null == database) {
+    public static Database getInstance(Context context)
+    {
+        if (null == database)
+        {
             database = buildDatabaseInstance(context);
         }
         return database;
     }
 
-    private static Database buildDatabaseInstance(Context context) {
+    private static Database buildDatabaseInstance(Context context)
+    {
         return Room.databaseBuilder(context,
                 Database.class,
                 "DB")
                 .allowMainThreadQueries().build();
     }
 
-    public void cleanUp(){
+    public void cleanUp()
+    {
         database = null;
     }
 

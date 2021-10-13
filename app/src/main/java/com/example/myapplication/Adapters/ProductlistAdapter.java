@@ -1,4 +1,4 @@
-package com.example.myapplication.Adapter;
+package com.example.myapplication.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -41,16 +41,23 @@ public abstract class ProductlistAdapter extends RecyclerView.Adapter<Productlis
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder vh, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(ViewHolder re, @SuppressLint("RecyclerView") int position) {
 
-        vh.name.setText("Name: "+toCapitalize(list.get(position).getProduct_name()));
-        vh.description.setText("Desc: "+toCapitalize(list.get(position).getProduct_desc()));
-        vh.price.setText("Price: $"+list.get(position).getProduct_price());
+        re.name.setText("Name: "+toCapitalize(list.get(position).getProduct_name()));
+
+        re.description.setText("Desc: "+toCapitalize(list.get(position).getProduct_desc()));
+
+        re.price.setText("Price: $"+list.get(position).getProduct_price());
+
         String providerStr = Database.getInstance(context).getProviderDao().getSpecficProviderById(list.get(position).getProvider_fk()).getProvider_name();
-        vh.provider.setText("Provider: "+toCapitalize(providerStr));
-        vh.delete.setOnClickListener(new View.OnClickListener() {
+
+        re.provider.setText("Provider: "+toCapitalize(providerStr));
+
+        re.delete.setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 deleteproduct(position);
             }
         });
@@ -67,11 +74,11 @@ public abstract class ProductlistAdapter extends RecyclerView.Adapter<Productlis
         ImageView delete;
         public ViewHolder(View view) {
             super(view);
-            description=(TextView)itemView.findViewById(R.id.description);
-            name=(TextView)itemView.findViewById(R.id.name);
-            price=(TextView)itemView.findViewById(R.id.price);
-            provider=(TextView)itemView.findViewById(R.id.provider);
-            delete=(ImageView) itemView.findViewById(R.id.delete);
+            description= (TextView)itemView.findViewById(R.id.description);
+            name= (TextView)itemView.findViewById(R.id.name);
+            price= (TextView)itemView.findViewById(R.id.price);
+            provider= (TextView)itemView.findViewById(R.id.provider);
+            delete= (ImageView) itemView.findViewById(R.id.delete);
 
             view.setOnClickListener(this);
         }

@@ -10,10 +10,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.myapplication.Adapter.ProductlistAdapter;
+import com.example.myapplication.Adapters.ProductlistAdapter;
 import com.example.myapplication.Database.DatabaseInterface.Database;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.Pojo.Productbean;

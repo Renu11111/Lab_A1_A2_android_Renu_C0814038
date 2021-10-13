@@ -11,7 +11,8 @@ import com.example.myapplication.Pojo.Productbean;
 import java.util.List;
 
 @Dao
-public interface ProductDao {
+public interface ProductDao
+{
     @Query("SELECT COUNT(*) FROM products WHERE provider_fk = :id")
     int getProductsCount(int id);
 

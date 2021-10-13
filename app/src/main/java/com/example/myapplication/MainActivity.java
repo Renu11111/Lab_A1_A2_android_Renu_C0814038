@@ -3,7 +3,7 @@ package com.example.myapplication;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.myapplication.Adapter.ViewPagerAdapter;
+import com.example.myapplication.Adapters.ViewPagerAdapter;
 import com.example.myapplication.Database.DatabaseInterface.Database;
 import com.example.myapplication.Pojo.Productbean;
 import com.example.myapplication.Pojo.Providerbean;
@@ -12,12 +12,8 @@ import com.example.myapplication.ui.main.ProviderAddUpdate;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
-import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
-
-import android.util.Log;
-import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         Productbean pro4 = new Productbean("thinkpad","laptop",1000,p12.getProvider_id());
         Productbean pro5 = new Productbean("tablet","tab",300,p12.getProvider_id());
         Productbean pro6 = new Productbean("mi redmi","phone",100,p12.getProvider_id());
-        List<Productbean> products = new ArrayList<>();;
+        List<Productbean> products = new ArrayList<>();
         products.add(pro);
         products.add(pro2);
         products.add(pro3);

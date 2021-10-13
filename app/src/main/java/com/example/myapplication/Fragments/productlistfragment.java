@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.example.myapplication.Adapter.ProductlistAdapter;
-import com.example.myapplication.Adapter.ProviderlistAdapter;
+import com.example.myapplication.Adapters.ProductlistAdapter;
 import com.example.myapplication.Database.DatabaseInterface.Database;
 import com.example.myapplication.Pojo.Productbean;
 import com.example.myapplication.R;
@@ -75,7 +73,8 @@ public class productlistfragment extends Fragment {
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
+            public void afterTextChanged(Editable s)
+            {
                 filter(s.toString());
             }
         });
@@ -84,9 +83,11 @@ public class productlistfragment extends Fragment {
         }else {
             product_recycler.setVisibility(View.VISIBLE);
         }
-        adapter= new ProductlistAdapter(getContext(), listproduct) {
+        adapter= new ProductlistAdapter(getContext(), listproduct)
+        {
             @Override
-            public void deleteproduct(int pos) {
+            public void deleteproduct(int pos)
+            {
                 final AlertDialog.Builder mainDialog = new AlertDialog.Builder(getContext());
                 LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View dialogView = inflater.inflate(R.layout.alert_dialog, null);
@@ -107,9 +108,11 @@ public class productlistfragment extends Fragment {
                     }
                 });
 
-                save.setOnClickListener(new View.OnClickListener() {
+                save.setOnClickListener(new View.OnClickListener()
+                {
                     @Override
-                    public void onClick(View v) {
+                    public void onClick(View v)
+                    {
                         database.getProductDao().deleteProduct(listproduct.get(pos));
                         listproduct.remove(pos);
                         adapter.list=listproduct;
@@ -117,7 +120,8 @@ public class productlistfragment extends Fragment {
                         alertDialog.dismiss();
                     }
                 });
-                cross.setOnClickListener(new View.OnClickListener() {
+                cross.setOnClickListener(new View.OnClickListener()
+                {
                     @Override
                     public void onClick(View v) {
                         alertDialog.dismiss();
@@ -132,7 +136,8 @@ public class productlistfragment extends Fragment {
         return view;
 
     }
-    private void filter(String text) {
+    private void filter(String text)
+    {
         listproduct = database.getProductDao().getAllProducts();
         List<Productbean> temp = new ArrayList();
         for (Productbean n :listproduct) {
@@ -145,7 +150,8 @@ public class productlistfragment extends Fragment {
     }
 
     @Override
-    public void onResume() {
+    public void onResume()
+    {
         super.onResume();
         adapter.list = database.getProductDao().getAllProducts();
         product_recycler.getAdapter().notifyDataSetChanged();
