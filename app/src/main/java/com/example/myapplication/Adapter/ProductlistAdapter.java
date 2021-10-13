@@ -1,27 +1,35 @@
 package com.example.myapplication.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.myapplication.Database.DatabaseInterface.Database;
+import com.example.myapplication.Pojo.Productbean;
 import com.example.myapplication.R;
+import com.example.myapplication.ui.main.ProductAddUpdate;
 
 import java.util.List;
 
 
-public class ProductlistAdapter extends RecyclerView.Adapter<ProductlistAdapter.ViewHolder>{
+public abstract class ProductlistAdapter extends RecyclerView.Adapter<ProductlistAdapter.ViewHolder>{
 
-    private Context context;
-    private View.OnClickListener onClickListener;
+     Context context;
+    public List<Productbean> list;
 
-    public ProductlistAdapter(Context context, List data) {
 
+    public ProductlistAdapter(Context context, List<Productbean> listproduct) {
+        this.context=context;
+        this.list=listproduct;
     }
 
     @NonNull
@@ -33,30 +41,55 @@ public class ProductlistAdapter extends RecyclerView.Adapter<ProductlistAdapter.
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder vh, final int position) {
+    public void onBindViewHolder(ViewHolder vh, @SuppressLint("RecyclerView") int position) {
 
+        vh.name.setText("Name: "+toCapitalize(list.get(position).getProduct_name()));
+        vh.description.setText("Desc: "+toCapitalize(list.get(position).getProduct_desc()));
+        vh.price.setText("Price: $"+list.get(position).getProduct_price());
+        String providerStr = Database.getInstance(context).getProviderDao().getSpecficProviderById(list.get(position).getProvider_fk()).getProvider_name();
+        vh.provider.setText("Provider: "+toCapitalize(providerStr));
+        vh.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteproduct(position);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return 4;
+        return list.size();
     }
 
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
+        TextView name,description,price,provider;
+        ImageView delete;
         public ViewHolder(View view) {
             super(view);
+            description=(TextView)itemView.findViewById(R.id.description);
+            name=(TextView)itemView.findViewById(R.id.name);
+            price=(TextView)itemView.findViewById(R.id.price);
+            provider=(TextView)itemView.findViewById(R.id.provider);
+            delete=(ImageView) itemView.findViewById(R.id.delete);
+
             view.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
 
-
+            Intent i=new Intent(context, ProductAddUpdate.class);
+            i.putExtra("from","update");
+            i.putExtra("product_id", list.get(getAdapterPosition()).getProduct_id());
+            context.startActivity(i);
         }
     }
+    public abstract void deleteproduct(int pos);
 
+    public String toCapitalize(String s){
+        return s.substring(0,1).toUpperCase() + s.substring(1).toLowerCase();
+    }
 
 }
 

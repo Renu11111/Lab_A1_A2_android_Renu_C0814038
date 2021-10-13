@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+   android:fillViewport="true"
+    android:fitsSystemWindows="true"
     tools:context=".ui.main.ProviderAddUpdate">
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
     <EditText
         android:id="@+id/name"
         android:layout_width="match_parent"
@@ -48,6 +52,34 @@
         android:padding="5dp"
         android:textColor="#8B8B8B"
         android:textSize="14dp" />
+    <EditText
+        android:id="@+id/lat"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/edittext_bg"
+        android:ellipsize="end"
+        android:hint="Provider Latitude"
+        android:imeOptions="actionNext"
+        android:maxLines="1"
+        android:inputType="phone"
+        android:padding="5dp"
+        android:textColor="#8B8B8B"
+        android:textSize="14dp" />
+    <EditText
+        android:id="@+id/lng"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/edittext_bg"
+        android:ellipsize="end"
+        android:hint="Provider Longitude "
+        android:imeOptions="actionNext"
+        android:maxLines="1"
+        android:inputType="phone"
+        android:padding="5dp"
+        android:textColor="#8B8B8B"
+        android:textSize="14dp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -56,37 +88,49 @@
         android:orientation="horizontal"
         android:weightSum="1">
 
-        <ImageView
-            android:id="@+id/emailus"
+        <Button
+            android:id="@+id/callus"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_baseline_call_24"
+            android:text="Call Us"
             android:layout_weight="0.5"/>
 
-        <ImageView
+        <Button
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:id="@+id/price"
+            android:id="@+id/emailus"
+            android:text="Email Us"
             android:layout_weight="0.5"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/ic_baseline_email_24"
             android:layout_centerVertical="true" />
 
     </LinearLayout>
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/provider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Products :"
+        android:text="All Products By Provider"
         android:textSize="16dp"
         android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_margin="10dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/recycler"/>
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button_bg"
+        android:text="Add"
+        android:textAllCaps="false"
+        android:textColor="@color/white"/>
 </LinearLayout>
+</androidx.core.widget.NestedScrollView>
